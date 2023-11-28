@@ -28,6 +28,11 @@ export const RQSuperHeroesPage = () => {
       // onError: onError since key and value is the same you can specify ES6 shorthand
       onSuccess,
       onError,
+      // select receive the api data as an argument
+      select: (data) => {
+        const superHeroNames = data.data.map((hero) => hero.name);
+        return superHeroNames;
+      },
     }
   );
 
@@ -43,8 +48,11 @@ export const RQSuperHeroesPage = () => {
     <>
       <h2>React Query Super Heroes Page</h2>
       <button onClick={refetch}>Fetch Heroes</button>
-      {data?.data.map((hero) => {
+      {/* {data?.data.map((hero) => {
         return <div key={hero.name}>{hero.name}</div>;
+      })} */}
+      {data.map((heroName) => {
+        return <div key={heroName}>{heroName}</div>;
       })}
     </>
   );
