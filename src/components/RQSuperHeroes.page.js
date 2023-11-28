@@ -6,6 +6,14 @@ const fetchSuperHeroes = () => {
 };
 
 export const RQSuperHeroesPage = () => {
+  const onSuccess = (data) => {
+    console.log("Perform side effect after data fetching", data);
+  };
+
+  const onError = (error) => {
+    console.log("Perform side effect after encountering error", error);
+  };
+
   const { isLoading, data, isError, error, refetch, isFetching } = useQuery(
     "super-heroes",
     fetchSuperHeroes,
@@ -15,7 +23,11 @@ export const RQSuperHeroesPage = () => {
       // refetchOnWindowFocus: true,
       // refetchInterval: 2000,
       // stateTime: 0,
-      enabled: false,
+      // enabled: false,
+      // onSuccess: onSuccess,
+      // onError: onError since key and value is the same you can specify ES6 shorthand
+      onSuccess,
+      onError,
     }
   );
 
